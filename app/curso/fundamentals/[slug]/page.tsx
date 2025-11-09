@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { getLesson, readLessonMarkdown, getModules } from '../../../../lib/course';
 import { remark } from 'remark';
 import html from 'remark-html';
+import dynamic from 'next/dynamic';
+const CodeRunner = dynamic(() => import('../../../../components/CodeRunner'), { ssr: false });
 
 function toTitle(id: string) {
   return id.replace(/^\d+-/, '').replace(/-/g, ' ');
@@ -38,6 +40,12 @@ export default async function LessonPage({ params }: { params: { slug: string } 
       </nav>
       <h1 className="text-3xl font-bold mb-4">{lesson.title}</h1>
       <article className="prose prose-slate max-w-none bg-white border rounded p-6" dangerouslySetInnerHTML={{ __html: content }} />
+
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold mb-2">Experimente no navegador</h2>
+        <p className="text-sm text-gray-600 mb-2">Altere o código e clique em Executar. As saídas aparecerão abaixo via console.log.</p>
+        <CodeRunner storageKey={`fundamentals:${lesson.slug}`} initialCode={`// Experimente: declare variáveis e use console.log\nconst nome = 'Ana'\nconst idade = 30\nconsole.log(nome, idade)\nconsole.log(typeof nome, typeof idade)`} />
+      </section>
       <div className="mt-6">
         <Link className="inline-block px-4 py-2 rounded bg-emerald-600 text-white hover:bg-emerald-700" href={`/curso/fundamentals/${lesson.slug}/exercises`}>
           Praticar: Exercícios Interativos
@@ -59,12 +67,7 @@ export default async function LessonPage({ params }: { params: { slug: string } 
           )}
         </div>
       </div>
-      <div className="mt-4 text-sm text-gray-600">
-        <p>
-          Dica: rode a demonstração relacionada a esta lição no terminal.
-        </p>
-        <code className="block bg-slate-100 rounded p-2 mt-2">npm run course 01</code>
-      </div>
+      {/* Dica de terminal removida: a plataforma é 100% web interativa */}
     </main>
   );
 }
