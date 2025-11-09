@@ -1,0 +1,30 @@
+{
+  "name": "tailwind-course",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "course": "node javascript-course/run-demo.js",
+    "course:01": "node javascript-course/lessons/demo-01.js",
+    "course:02": "node javascript-course/lessons/demo-02.js",
+    "course:03": "node javascript-course/lessons/demo-03.js",
+    "course:04": "node javascript-course/lessons/demo-04.js",
+    "course:05": "node javascript-course/lessons/demo-05.js"
+  },
+  "dependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "next": "13.5.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "autoprefixer": "10.4.14",
+    "postcss": "8.4.27",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.9.3"
+  }
+}
