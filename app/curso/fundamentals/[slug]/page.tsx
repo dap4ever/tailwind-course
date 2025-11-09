@@ -38,6 +38,11 @@ export default async function LessonPage({ params }: { params: { slug: string } 
       </nav>
       <h1 className="text-3xl font-bold mb-4">{lesson.title}</h1>
       <article className="prose prose-slate max-w-none bg-white border rounded p-6" dangerouslySetInnerHTML={{ __html: content }} />
+      <div className="mt-6">
+        <Link className="inline-block px-4 py-2 rounded bg-emerald-600 text-white hover:bg-emerald-700" href={`/curso/fundamentals/${lesson.slug}/exercises`}>
+          Praticar: Exercícios Interativos
+        </Link>
+      </div>
       <div className="mt-6 flex justify-between text-sm">
         <div>
           {prev && (
