@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="container mx-auto flex items-center gap-6">
             <a href="/" className="font-bold tracking-wide">Plataforma de Curso</a>
             <a href="/curso" className="hover:underline">Curso (Interativo)</a>
-            <a href="https://github.com/dap4ever/tailwind-course" target="_blank" rel="noreferrer" className="hover:underline">Repositório</a>
+            <a href="https://github.com/dap4ever/javascript-course" target="_blank" rel="noreferrer" className="hover:underline">Repositório</a>
           </nav>
         </header>
         {children}

@@ -24,7 +24,11 @@ function readFirstLine(p: string): string {
 export function getModules(): ModuleInfo[] {
   if (!fs.existsSync(COURSE_ROOT)) return [];
   const moduleDirs = fs.readdirSync(COURSE_ROOT).filter(d => fs.statSync(path.join(COURSE_ROOT, d)).isDirectory());
-  return moduleDirs.map(md => {
+  
+  // Ordem customizada dos módulos
+  const moduleOrder = ['fundamentals', 'intermediate', 'advanced', 'extras'];
+  
+  const modules = moduleDirs.map(md => {
     const dir = path.join(COURSE_ROOT, md);
     const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
     const lessons: LessonInfo[] = files.map(f => {
@@ -34,7 +38,17 @@ export function getModules(): ModuleInfo[] {
       return { module: md, slug, title, filePath: fp };
     }).sort((a,b) => a.slug.localeCompare(b.slug));
     return { name: md, lessons };
-  }).sort((a,b) => a.name.localeCompare(b.name));
+  });
+  
+  // Ordenar por ordem customizada
+  return modules.sort((a, b) => {
+    const indexA = moduleOrder.indexOf(a.name);
+    const indexB = moduleOrder.indexOf(b.name);
+    if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
 }
 
 export function getLesson(module: string, slug: string): LessonInfo | null {
